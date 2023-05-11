@@ -21,19 +21,19 @@ These instructions will get you a copy of the project up and running on your loc
 
    ```bash
    git clone https://github.com/<your-github-username>/todo.git
-  ```
+  
 2. Navigate into the directory:
     ```bash
     cd todo
-    ```
+    
 3. Install the dependencies:
     ```bash
     npm install
-    ```
+    
 4. Run the app:
     ```bash
     ionic serve
-    ```
+    
 Open your web browser and visit `http://localhost:8100`.
 
 # Built With:
