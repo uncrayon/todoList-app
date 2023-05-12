@@ -1,27 +1,38 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Todo List
+    <ion-title class="ion-text-center">
+      TODO LIST
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-segment [(ngModel)]="filter">
+    <ion-segment-button value ="uncompleted">
+      <ion-label>Pending Tasks</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value ="completed">
+      <ion-label>Done Tasks</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value ="all">
+      <ion-label>All Tasks</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
   <ion-list>
-    <ion-item *ngFor="let todo of todos">
-      <ion-label>
-        <ion-text color="medium" *ngIf="todo.completed; else notCompleted">
-          {{ todo.task }}
-        </ion-text>
-        <ng-template #notCompleted>
-          {{ todo.task }}
-        </ng-template>
-      </ion-label>
-      <ion-button fill="clear" slot="end" (click)="removeTask(todo.id)">
-        Done
-      </ion-button>
+    <ion-item *ngFor="let todo of filteredTodos">
+      <ion-item>
+        <ion-checkbox slot = "start" aria-label="label" [(ngModel)] = "todo.completed"></ion-checkbox>
+        <ion-label>
+          <ion-text [color] = "todo.completed ? 'medium' : 'dark'">
+            {{todo.task}}
+          </ion-text>
+        </ion-label>
+      </ion-item>  
     </ion-item>
   </ion-list>
+
   <ion-button expand="full" (click)="showAddTaskAlert()">
     Add Task
   </ion-button>
