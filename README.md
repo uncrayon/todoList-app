@@ -40,6 +40,16 @@ Open your web browser and visit `http://localhost:8100`.
 * [Ionic](https://ionicframework.com/)
 * [Angular](https://angular.io/)
 
+# What's New
+## Version 1.2.0
+New Features:
+
+- **Task Completion Status:** Users can now mark tasks as completed. Each task item includes a checkbox. When you complete a task, click the checkbox to mark the task as done. Completed tasks are visually distinguished from uncompleted tasks.
+
+- **Task Filtering:** We've added the ability to filter tasks based on their completion status. At the top of the task list, you'll find a new filter control with three options: "All", "Completed", and "Uncompleted". The "All" option shows all tasks, the "Completed" option shows only tasks that have been marked as done, and the "Uncompleted" option shows only tasks that are yet to be done.
+
+
+
 # License
 MIT License
 
