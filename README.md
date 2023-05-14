@@ -48,6 +48,8 @@ New Features:
 
 - **Task Filtering:** We've added the ability to filter tasks based on their completion status. At the top of the task list, you'll find a new filter control with three options: "All", "Completed", and "Uncompleted". The "All" option shows all tasks, the "Completed" option shows only tasks that have been marked as done, and the "Uncompleted" option shows only tasks that are yet to be done.
 
+- **Task Due Date:** Users can now add a due date and be aware of those task that are closest to being delivered. 
+
 
 
 # License
