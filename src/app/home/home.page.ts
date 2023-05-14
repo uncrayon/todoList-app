@@ -11,21 +11,22 @@ import { Todo } from '../todo.model';
 
 export class HomePage {
   todos: Todo[] = [
-    {id : '1', task: 'Buy Milk', completed: false},
-    {id : '2', task: 'Pick up laundry',completed:true},
-    {id : '3', task: 'Learn Ionic', completed:false},
+    {id : '1', task: 'Buy Milk', completed: false, dueDate : new Date(2023, 4, 18)},
+    {id : '2', task: 'Pick up laundry',completed:false, dueDate :new Date(2023, 4, 10)},
+    {id : '3', task: 'Learn Ionic', completed:false,dueDate : new Date(2023, 4, 17)},
   ];
   
   filter : 'all' | 'completed' | 'uncompleted' = 'uncompleted';
 
   constructor(private alertController: AlertController){}
 
-  addTask(taskName:string) {
+  addTask(taskName:string,dueDate:Date) {
     const id = Math.random().toString();
     this.todos.push({
       id : id,
       task : taskName,
       completed : false,
+      dueDate : dueDate,
     });
   }
 
@@ -51,6 +52,7 @@ export class HomePage {
   }
 
   get filteredTodos() {
+    this.todos.sort((a,b)=>a.dueDate.getTime()-b.dueDate.getTime());
     if (this.filter === 'completed') {
       return this.todos.filter(t => t.completed);
     } else if (this.filter === 'uncompleted') {
@@ -68,6 +70,11 @@ export class HomePage {
           name : 'task',
           type : 'text',
           placeholder : 'Task name'
+        },
+        {
+          name : 'dueDate',
+          type : 'date',
+          placeholder : 'Due Date'
         }
       ],
       buttons : [
@@ -78,7 +85,9 @@ export class HomePage {
         {
           text : 'Add',
           handler : data => {
-            this.addTask(data.task)
+            console.log(typeof(data.dueDate))
+            console.log(data.dueDate)
+            this.addTask(data.task,new Date(data.dueDate.split('-')[0], data.dueDate.split('-')[1], data.dueDate.split('-')[2]))
           }
         }
       ]
