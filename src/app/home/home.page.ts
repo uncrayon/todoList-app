@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Todo } from '../todo.model';
+import { getDatabase, ref, set, onValue } from 'firebase/database';
 
 
 @Component({
@@ -17,8 +18,21 @@ export class HomePage {
   ];
   
   filter : 'all' | 'completed' | 'uncompleted' = 'uncompleted';
+  todosRef: any;
 
-  constructor(private alertController: AlertController){}
+  constructor(private alertController: AlertController){
+    const db = getDatabase();
+    this.todosRef = ref(db, 'todos');
+    // Load todos from Firebase
+    this.loadTodosFromFirebase();
+  }
+
+  loadTodosFromFirebase() {
+    onValue(this.todosRef, (snapshot) => {
+      this.todos = snapshot.val() || [];
+    });
+  }
+
 
   addTask(taskName:string,dueDate:Date) {
     const id = Math.random().toString();
