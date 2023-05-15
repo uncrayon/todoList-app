@@ -19,7 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
 })
 export class AppModule {}
 
-const firebaseConfig = {
+const firebaseConfig :any = {
   apiKey: "AIzaSyD8D53PBYj7WvyJ1bam72ejqAlxvwkU9Cw",
   authDomain: "utodo-app.firebaseapp.com",
   databaseURL: "https://utodo-app-default-rtdb.firebaseio.com",
