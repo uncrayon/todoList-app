@@ -50,7 +50,12 @@ New Features:
 
 - **Task Due Date:** Users can now add a due date and be aware of those task that are closest to being delivered. 
 
+# TODOs
+- Define a correct structure for tree and child
 
+- Change methods on firebase to update and push from set on an event 
+
+- Resolve UX: usability on date and dark mode, icons and text for add task card and close promise after push button ADD
 
 # License
 MIT License
