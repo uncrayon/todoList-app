@@ -41,7 +41,6 @@ export class HomePage {
       completed : false,
       dueDate : dueDate,
     });
-    console.log("this.prepareDataForFirebase(this.todos)");
     set(this.todosRef, this.todos.map((todo : any) => ({
       ...todo,
       dueDate: new Date(todo.dueDate).toISOString()})));
