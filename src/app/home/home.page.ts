@@ -11,11 +11,7 @@ import { getDatabase, ref, set, onValue } from 'firebase/database';
 })
 
 export class HomePage {
-  todos: Todo[] = [
-    {id : '1', task: 'Buy Milk', completed: false, dueDate : new Date(2023, 4, 18)},
-    {id : '2', task: 'Pick up laundry',completed:false, dueDate :new Date(2023, 4, 10)},
-    {id : '3', task: 'Learn Ionic', completed:false,dueDate : new Date(2023, 4, 17)},
-  ];
+  todos: Todo[] = [];
   
   filter : 'all' | 'completed' | 'uncompleted' = 'uncompleted';
   todosRef: any;
@@ -29,10 +25,13 @@ export class HomePage {
 
   loadTodosFromFirebase() {
     onValue(this.todosRef, (snapshot) => {
-      this.todos = snapshot.val() || [];
+      const data = snapshot.val();
+      this.todos = data ? data.map((todo : any) => ({
+        ...todo,
+        dueDate: new Date(todo.dueDate)
+      })) : [];
     });
   }
-
 
   addTask(taskName:string,dueDate:Date) {
     const id = Math.random().toString();
@@ -42,6 +41,10 @@ export class HomePage {
       completed : false,
       dueDate : dueDate,
     });
+    console.log("this.prepareDataForFirebase(this.todos)");
+    set(this.todosRef, this.todos.map((todo : any) => ({
+      ...todo,
+      dueDate: new Date(todo.dueDate).toISOString()})));
   }
 
   removeTask(id:string){
@@ -59,6 +62,9 @@ export class HomePage {
           return todo;
         }
       });
+      set(this.todosRef, this.todos.map((todo : any) => ({
+        ...todo,
+        dueDate: new Date(todo.dueDate).toISOString()})));
   }
 
   changeFilter(filter: 'all' | 'completed' | 'uncompleted'){
